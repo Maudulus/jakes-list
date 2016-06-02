@@ -7,11 +7,11 @@ import NotFound from '../ui/pages/NotFound.jsx';
 const routes = [
   {
     path: '/',
-    component: Home
+    component: Map
   },
   {
-    path: '/map',
-    component: Map
+    path: '/home',
+    component: Home
   }, {
     path: '/venue/:venueName',
     component: Venue

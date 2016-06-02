@@ -103,9 +103,7 @@ function sendPrice(venue,price) {
 // }
 UberEstimateClass = React.createClass({
   render() {
-    console.log(this.props.uberInfo);
     var uberXPrice = this.props.uberInfo[1];
-    console.log(uberXPrice);
     return (
       <div>
         <h3>Get there with Uber: {uberXPrice.estimate}</h3>
