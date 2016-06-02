@@ -50,4 +50,26 @@ body {
 			}			
 		}		
 	}
+	#venue-bind {
+		position: absolute;
+		top: 0;
+		background: white;
+		height: 100%;
+		width:100%;
+		&.hidden {
+			display:none;
+		}
+		.venue {
+			.close-modal {
+				right: 20px;
+				position: absolute;
+				color:black;
+				font-size: 50px;
+				font-weight:bold;
+				top: 0;	
+				cursor:pointer;		
+				font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+			}
+		}
+	}
 }

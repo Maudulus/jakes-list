@@ -58,7 +58,12 @@ if (Meteor.isServer) {
 	});	
 
 	postRoutes.route('/uber-estimate', function(params, req, res, next) {
-		var uberResponse = HTTP.call('GET',"https://sandbox-api.uber.com/v1/estimates/price?start_latitude=42.363271&start_longitude=-71.050084&end_latitude=42.379521&end_longitude=-71.103980&server_token=AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki&seat_count=2");
+		var currLat = params.query.lat;
+		var currLng = params.query.lng;
+		var venueLocationLat = params.query.venueLocationLat;
+		var venueLocationLng = params.query.venueLocationLng;
+
+		var uberResponse = HTTP.call('GET',"https://sandbox-api.uber.com/v1/estimates/price?start_latitude="+currLat+"&start_longitude="+currLng+"&end_latitude="+venueLocationLat+"&end_longitude="+venueLocationLng+"&server_token=AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki&seat_count=2");
 
 		res.setHeader( 'Content-Type', 'application/json' );
 		res.statusCode = 200;

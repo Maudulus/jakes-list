@@ -1,4 +1,6 @@
 import React from 'react';
+var ReactDOM = require('react-dom');
+
 import classNames from 'classnames';
 import '/imports/api/Price.js';
 import '/imports/api/Wait.js';
@@ -6,11 +8,10 @@ import '/imports/api/Wait.js';
 Venue = React.createClass({
   render() {
     var self = this;
-    // console.log(this.props.venueName);
     var venueName = this.props.venueName;
-    // var venueName = this.props.params.venueName;
     return (
       <div className='venue'>
+        <a className={classNames('close-modal')} onClick={self.closeModal}>×</a>
         <h1>This is ... </h1> // {venueName}
 
         <WaitTimeClass name={venueName}/>
@@ -25,17 +26,42 @@ Venue = React.createClass({
           <div className="medium" onClick={self.handlePrice.bind(this,venueName,1)}>$$</div>
           <div className="high" onClick={self.handlePrice.bind(this,venueName,2)}>$$$</div>
         </div>
+        <div id="uber-estimate"></div>
       </div>
     );
+  }, 
+  closeModal() {
+    $('#venue-bind').toggleClass('hidden');
   },
   handleWaitTime(currentVenue,time) {
     sendWaitTime(currentVenue,time);
-  },
+  }, 
   handlePrice(currentVenue,price){
     sendPrice(currentVenue,price);
-  }, componentDidMount() {  
-    requestUberEstimate();
-  },
+  }, 
+  componentDidMount() { 
+    $('#venue-bind').toggleClass('hidden');
+    var venueLocation = this.props.venueCompleteObj.location;
+    this.requestUberEstimate(venueLocation);
+  }, 
+  componentDidUpdate(prevProps, prevState) {
+    $('#venue-bind').toggleClass('hidden');
+    var venueLocation = this.props.venueCompleteObj.location;
+    this.requestUberEstimate(venueLocation);
+  }, 
+  requestUberEstimate(venueLocation) {
+    $.ajax({
+      type: "POST",
+      url: "/uber-estimate?lat=" + geo.lat + "&lng=" + geo.lng + "&venueLocationLat=" + venueLocation.lat + "&venueLocationLng=" + venueLocation.lng,
+      success: function(response){
+        var uberInfo = response.data.prices;
+        ReactDOM.render(<UberEstimateClass uberInfo={uberInfo} />,document.getElementById('uber-estimate'));
+      },
+      error: function(response){
+        console.log("Error:" + JSON.stringify(response));
+      }
+    });  
+  }
 });
 function sendWaitTime(venue,time) {
   var userId = Meteor.user()._id;
@@ -63,18 +89,30 @@ function sendPrice(venue,price) {
     }
   });  
 }
-function requestUberEstimate(venue,price) {
-  $.ajax({
-    type: "POST",
-    url: "/uber-estimate",
-    success: function(response){
-      console.log(response.data.prices);
-    },
-    error: function(response){
-      console.log("Error:" + JSON.stringify(response));
-    }
-  });  
-}
+// function requestUberEstimate(venueLocation) {
+//   $.ajax({
+//     type: "POST",
+//     url: "/uber-estimate?lat=" + geo.lat + "&lng=" + geo.lng + "&venueLocationLat=" + venueLocation.lat + "&venueLocationLng=" + venueLocation.lng,
+//     success: function(response){
+//       console.log(response.data.prices);
+//     },
+//     error: function(response){
+//       console.log("Error:" + JSON.stringify(response));
+//     }
+//   });  
+// }
+UberEstimateClass = React.createClass({
+  render() {
+    console.log(this.props.uberInfo);
+    var uberXPrice = this.props.uberInfo[1];
+    console.log(uberXPrice);
+    return (
+      <div>
+        <h3>Get there with Uber: {uberXPrice.estimate}</h3>
+      </div>
+    );
+  },
+});
 
 WaitTimeClass = React.createClass({
   mixins: [ReactMeteorData],
@@ -137,14 +175,5 @@ function calculateAverageTime(allTimes,param) {
   }, 0) / (arr.length === 0 ? 1 : arr.length);   
   return average;   
 }
-
-// function getMeteorData() {
-//  var handle = Meteor.subscribe('wait');
-//  // if(handle.ready()) {
-//    var data = Wait.findOne({venue:"Ascend Nightclub"});
-//     console.log(data);
-//  // }
-//  return data;
-// }
 
 export default Venue;

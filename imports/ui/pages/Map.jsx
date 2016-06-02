@@ -22,7 +22,8 @@ Map = React.createClass({
             </div>  
            </div>
          </div>
-         <div id="venue-bind">
+         <div id="venue-bind" className={classNames('hidden')}>
+          
          </div>
        </div>
     );
@@ -64,19 +65,13 @@ Map = React.createClass({
     ReactDOM.render(<VenueItem allVenues={arr}/>,document.getElementById('list-item'));
 
     $.each(arr,function(index, thisVenue) {
-      // try{
-        // $('.list-item').append('<a onClick={self.mountVenue} data-venue="/venue/'+thisVenue.name+'"><div class="columns small-12">'+thisVenue.name+'</div></a>');
-        // ReactDOM.render(<a onClick={self.mountVenue} data-venue="/venue/"+thisVenue.name><div class="columns small-12">thisVenue.name</div></a>);
-        var marker = L.marker([thisVenue.location.lat, thisVenue.location.lng], {
-              icon: L.mapbox.marker.icon({
-                'marker-color': '#9c89cc'
-              })
+      var marker = L.marker([thisVenue.location.lat, thisVenue.location.lng], {
+            icon: L.mapbox.marker.icon({
+              'marker-color': '#9c89cc'
             })
-            .bindPopup('<div class=\"marker-title\"><h2>'+thisVenue.name+'</h2></div><table> <tr> <th>Phone</th> <td>'+thisVenue.contact.formattedPhone+'</td> </tr> <tr> <th>Address</th> <td>'+thisVenue.location.formattedAddress[0]+thisVenue.location.formattedAddress[1]+'</td> </tr> </table>')
-            .addTo(map);
-      // }catch(err) {
-      //   console.log(err);
-      // }    
+          })
+          .bindPopup('<div class=\"marker-title\"><h2>'+thisVenue.name+'</h2></div><table> <tr> <th>Phone</th> <td>'+thisVenue.contact.formattedPhone+'</td> </tr> <tr> <th>Address</th> <td>'+thisVenue.location.formattedAddress[0]+thisVenue.location.formattedAddress[1]+'</td> </tr> </table>')
+          .addTo(map);
     });
   },
   mountVenue() {
@@ -87,22 +82,17 @@ Map = React.createClass({
 VenueItem = React.createClass({
   render() {
     var self = this;
-    console.log(this.props.allVenues);
     var allVenues = this.props.allVenues;
     return(
       <div>
         {allVenues.map(function(singleVenue, index){
-          return <a key={index} onClick={self.showVenue.bind(this,singleVenue.name)} data-venue="">{singleVenue.name}</a>;
+          return <a className={classNames('columns small-12')} key={index} onClick={self.showVenue.bind(null,singleVenue.name,singleVenue)} data-venue="">{singleVenue.name}</a>;
         })}  
       </div>    
-      // <a onClick={self.mountVenue} data-venue="/venue/"+thisVenue.name>
-        // <div class="columns small-12">thisVenue.name</div>
-      // </a>
     );
   }, 
-  showVenue(currName) {
-    console.log(currName);
-    ReactDOM.render(<Venue venueName={currName}/>,document.getElementById('venue-bind'));
+  showVenue(currName,venueCompleteObj) {
+    ReactDOM.render(<Venue venueCompleteObj={venueCompleteObj} venueName={currName}/>,document.getElementById('venue-bind'));
   }
 });
 
