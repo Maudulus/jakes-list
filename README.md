@@ -1,3 +1,30 @@
+UBER ESTIMATES
+https://sandbox-api.uber.com/v1/estimates/price?start_latitude=42.363271&start_longitude=-71.050084&end_latitude=42.379521&end_longitude=-71.103980&server_token=AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki&seat_count=2
+
+UBER REQUESTS
+https://sandbox-api.uber.com/v1/estimates/price?start_latitude=42.363271&start_longitude=-71.050084&end_latitude=42.379521&end_longitude=-71.103980&server_token=AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki
+
+UBER response: 
+https://login.uber.com/oauth/v2/authorize?client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM&response_type=code
+
+sets no specific time; need to set "expireAt" field in the actual document.
+db.venues.createIndex({"expireAt":1},{expireAfterSeconds:0})
+https://docs.mongodb.com/v3.0/tutorial/expire-data/
+
+Query Mongo for recently created stuff: 
+var lastHour = new Date();
+lastHour.setHours(lastHour.getHours()-1);
+
+var lastDay = new Date();
+lastDay.setDate(lastDay.getDate() - 1);
+
+db.users.aggregate(
+	{$match:{ "createdAt":{$gt: lastDay}, }}
+)  
+
+Can search for venues on foursquare: 
+https://api.foursquare.com/v2/venues/search?client_id=XTGLW12TM1TLLELLTFEAQPESJURGCJSKN0KMPYASIKTNNX3C&client_secret=FB4KZQ5W5NNZRICPUFCX4OFN1EXYUMEIZRZV5LYASEVDSUQJ&v=20130815&ll=40.7,-74&query=sushi
+
 # meteor-react-boilerplate
 A starter project for React &amp; Meteor
 

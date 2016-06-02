@@ -1,0 +1,53 @@
+/* CSS declarations go here */
+// @import '{zurb:foundation-sites}/scss/foundation';
+body {
+	// font-family: 'Old Standard TT', serif;
+	// font-family: 'Abril Fatface', cursive;
+	// font-family: 'Raleway', sans-serif;	
+	// font-family: 'Droid Sans', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
+	h1,h2,h3,h4 {
+		font-family: 'Abril Fatface', cursive;
+		// font-family: 'Old Standard TT', serif;
+	}
+	#map {
+		height:100%;
+		width:100%;
+	}
+	.flip-container {
+		perspective: 1000;
+		width: 320px;
+		height: 480px;
+		//flip class that is added to turn container over
+		&.flip .flipper {
+			transform: rotateY(180deg);
+		}	
+		/* flip speed goes here */
+		.flipper {
+			transition: 0.6s;
+			transform-style: preserve-3d;
+
+			position: relative;
+			.front, .back {
+				width: 320px;
+				height: 480px;
+
+				/* hide back of pane during swap */
+				backface-visibility: hidden;
+				position: absolute;
+				top: 0;
+				left: 0;				
+			}		
+			/* front pane, placed above back */
+			.front { 
+				z-index: 2;
+				/* for firefox 31 */
+				transform: rotateY(0deg);
+			}		
+			/* back, initially hidden pane */
+			.back {
+				transform: rotateY(180deg);
+			}			
+		}		
+	}
+}

@@ -20,6 +20,13 @@ ejson
 spacebars
 check
 ecmascript
-standard-minifier-css
 standard-minifier-js
 gadicc:blaze-react-component
+ewall:foundation
+seba:minifiers-autoprefixer
+fourseven:scss
+pauloborges:mapbox@2.2.3_2
+mdg:geolocation
+meteorhacks:picker
+http
+react-meteor-data
