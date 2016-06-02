@@ -1,4 +1,14 @@
 import '../imports/startup/server/main.js';
+var Uber = require('node-uber');
+var uber = new Uber({
+  client_id: 'zJ3GkufM0yruqffPR_B9rWiO0n7evyGM',
+  client_secret: 'c_isXPna8Q8-N-_4dgnq5cjc__Xnwh0SBHIbJevi',
+  server_token: 'AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki',
+  redirect_uri: 'http://localhost:3000/',
+  name: "Jake's List",
+  language: 'en_US', // optional, defaults to en_US
+  sandbox: true // optional, defaults to false
+});
 
 if (Meteor.isServer) {
 	// This code only runs on the server
@@ -73,5 +83,11 @@ if (Meteor.isServer) {
 	var getRoutes = Picker.filter(function(req, res) {
 	  return req.method == "GET";
 	});		
+
+	getRoutes.route('/api/login', function(request, response) {
+		var url = uber.getAuthorizeUrl(['history','profile', 'request', 'places']);
+		console.log(url);
+		response.redirect(url);		
+	});
 }
 

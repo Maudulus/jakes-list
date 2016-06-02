@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 accounts-password
-accounts-ui
 meteor-base
 mobile-experience
 mongo
@@ -30,3 +29,4 @@ mdg:geolocation
 meteorhacks:picker
 http
 react-meteor-data
+accounts-ui-unstyled

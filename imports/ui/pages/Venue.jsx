@@ -106,7 +106,7 @@ UberEstimateClass = React.createClass({
     var uberXPrice = this.props.uberInfo[1];
     return (
       <div>
-        <h3>Get there with Uber: {uberXPrice.estimate}</h3>
+        <a href="/api/login"><h3>Get there with Uber: {uberXPrice.estimate}</h3></a>
       </div>
     );
   },
