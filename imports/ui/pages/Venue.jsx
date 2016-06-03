@@ -42,20 +42,22 @@ Venue = React.createClass({
   componentDidMount() { 
     $('#venue-bind').toggleClass('hidden');
     var venueLocation = this.props.venueCompleteObj.location;
-    this.requestUberEstimate(venueLocation);
+    var venueName = this.props.venueCompleteObj.name;
+    this.requestUberEstimate(venueLocation,venueName);
   }, 
   componentDidUpdate(prevProps, prevState) {
     $('#venue-bind').toggleClass('hidden');
     var venueLocation = this.props.venueCompleteObj.location;
-    this.requestUberEstimate(venueLocation);
+    var venueName = this.props.venueCompleteObj.name;
+    this.requestUberEstimate(venueLocation,venueName);
   }, 
-  requestUberEstimate(venueLocation) {
+  requestUberEstimate(venueLocation,venueName) {
     $.ajax({
       type: "POST",
       url: "/uber-estimate?lat=" + geo.lat + "&lng=" + geo.lng + "&venueLocationLat=" + venueLocation.lat + "&venueLocationLng=" + venueLocation.lng,
       success: function(response){
         var uberInfo = response.data.prices;
-        ReactDOM.render(<UberEstimateClass uberInfo={uberInfo} />,document.getElementById('uber-estimate'));
+        ReactDOM.render(<UberEstimateClass venueName={venueName} uberInfo={uberInfo} />,document.getElementById('uber-estimate'));
       },
       error: function(response){
         console.log("Error:" + JSON.stringify(response));
@@ -89,24 +91,14 @@ function sendPrice(venue,price) {
     }
   });  
 }
-// function requestUberEstimate(venueLocation) {
-//   $.ajax({
-//     type: "POST",
-//     url: "/uber-estimate?lat=" + geo.lat + "&lng=" + geo.lng + "&venueLocationLat=" + venueLocation.lat + "&venueLocationLng=" + venueLocation.lng,
-//     success: function(response){
-//       console.log(response.data.prices);
-//     },
-//     error: function(response){
-//       console.log("Error:" + JSON.stringify(response));
-//     }
-//   });  
-// }
+
 UberEstimateClass = React.createClass({
   render() {
     var uberXPrice = this.props.uberInfo[1];
+    var venueName = this.props.venueName.replace(/ /g,"_");
     return (
       <div>
-        <a href="https://login.uber.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:3000?dogs=testing&scope=history profile request places&client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM"><h3>Get there with Uber: {uberXPrice.estimate}</h3></a>
+        <a href={ "https://login.uber.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:3000?venueName="+venueName+"&scope=history profile request places&client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM"}><h3>Get there with Uber: {uberXPrice.estimate}</h3></a>
       </div>
     );
   },
