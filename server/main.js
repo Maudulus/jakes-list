@@ -84,10 +84,15 @@ if (Meteor.isServer) {
 	  return req.method == "GET";
 	});		
 
-	getRoutes.route('/api/login', function(request, response) {
-		var url = uber.getAuthorizeUrl(['history','profile', 'request', 'places']);
-		console.log(url);
-		response.redirect(url);		
+	getRoutes.route('/api/login', function(params, req, res, next) {
+		// console.log(response);
+		// var url = uber.getAuthorizeUrl(['history','profile', 'request', 'places']);
+		// console.log(url);
+		// console.log(res);
+		// console.log(res);
+		// HTTP.call('GET',"https://login.uber.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:3000&scope=history profile request places&client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM");
+		// Router.go("https://login.uber.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:3000&scope=history profile request places&client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM");
+		// redirect("https://login.uber.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:3000&scope=history profile request places&client_id=zJ3GkufM0yruqffPR_B9rWiO0n7evyGM");		
 	});
 }
 
