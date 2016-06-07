@@ -2,7 +2,7 @@ import React from 'react';
 var ReactDOM = require('react-dom');
 import classNames from 'classnames';
 import './Venue.jsx';
-
+import '/imports/api/Venues.js';
 
 Map = React.createClass({
   render() {
@@ -41,6 +41,7 @@ Map = React.createClass({
               L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
               map = L.mapbox.map('map', 'mapbox.streets').setView([geo.lat, geo.lng], 12);   
               self.queryFourSquare('nightclub',geo.lat,geo.lng);
+              if (location.search) self.mountVenue(self.urlParams());
             }
           }
           if (--i && geo == null) myLoop(i);      
@@ -74,8 +75,19 @@ Map = React.createClass({
           .addTo(map);
     });
   },
-  mountVenue() {
-    console.log("mounting...");
+  mountVenue(urlParams) {
+    // var handle = Meteor.subscribe('venues');
+    // if(handle.ready()) {    
+      var discoveredVenue = Venues.find({name: urlParams.venueName}).fetch();
+    //   console.log(discoveredVenue);
+    // }
+    // var discoveredVenueLocation = [discoveredVenue.location.lat,discoveredVenue.location.lng];
+    // venueLocation={discoveredVenueLocation}
+    ReactDOM.render(<Venue venueCompleteObj={discoveredVenue} venueName={urlParams.venueName}/>,document.getElementById('venue-bind'));
+  },
+  urlParams() {
+    var search = location.search.substring(1);
+    return JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/_/g,' ') + '"}');
   }
 });
 

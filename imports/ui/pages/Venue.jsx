@@ -42,13 +42,13 @@ Venue = React.createClass({
   componentDidMount() { 
     $('#venue-bind').toggleClass('hidden');
     var venueLocation = this.props.venueCompleteObj.location;
-    var venueName = this.props.venueCompleteObj.name;
+    var venueName = this.props.venueName;
     this.requestUberEstimate(venueLocation,venueName);
   }, 
   componentDidUpdate(prevProps, prevState) {
     $('#venue-bind').toggleClass('hidden');
     var venueLocation = this.props.venueCompleteObj.location;
-    var venueName = this.props.venueCompleteObj.name;
+    var venueName = this.props.venueName;
     this.requestUberEstimate(venueLocation,venueName);
   }, 
   requestUberEstimate(venueLocation,venueName) {

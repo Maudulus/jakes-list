@@ -24,6 +24,9 @@ if (Meteor.isServer) {
 	Meteor.publish('price', function waitPublication() {
 		return Price.find();
 	});	
+	Meteor.publish('venues', function waitPublication() {
+		return Venues.find();
+	});		
 
 	var postRoutes = Picker.filter(function(req, res) {
 	  // you can write any logic you want.
