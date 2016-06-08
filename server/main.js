@@ -1,9 +1,9 @@
 import '../imports/startup/server/main.js';
 var Uber = require('node-uber');
 var uber = new Uber({
-  client_id: 'zJ3GkufM0yruqffPR_B9rWiO0n7evyGM',
-  client_secret: 'c_isXPna8Q8-N-_4dgnq5cjc__Xnwh0SBHIbJevi',
-  server_token: 'AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki',
+  client_id: process.env.UBER_CLIENT_ID,
+  client_secret: process.env.UBER_CLIENT_SECRET,
+  server_token: process.env.UBER_SERVER_TOKEN,
   redirect_uri: 'http://localhost:3000/',
   name: "Jake's List",
   language: 'en_US', // optional, defaults to en_US
@@ -15,7 +15,6 @@ if (Meteor.isServer) {
 
 	Meteor.startup(function () {
 	    // code to run on server at startup
-	    process.env.MAIL_URL="smtp://mgreggortest:testtest1@smtp.gmail.com:587/";
 	});
 
 	Meteor.publish('wait', function waitPublication() {
@@ -38,7 +37,7 @@ if (Meteor.isServer) {
 		var venue = params.query.venue;
 		var lat = params.query.lat;
 		var lng = params.query.lng;
-		var fsResponse = HTTP.call('GET',"https://api.foursquare.com/v2/venues/search?client_id=XTGLW12TM1TLLELLTFEAQPESJURGCJSKN0KMPYASIKTNNX3C&client_secret=FB4KZQ5W5NNZRICPUFCX4OFN1EXYUMEIZRZV5LYASEVDSUQJ&v=20130815&ll="+lat+","+lng+"&query=" + venue);
+		var fsResponse = HTTP.call('GET',"https://api.foursquare.com/v2/venues/search?client_id="+process.env.FOURSQUARE_CLIENT_ID+"&client_secret="+process.env.FOURSQUARE_CLIENT_SECRET+"&v=20130815&ll="+lat+","+lng+"&query=" + venue);
 		for (var ven in fsResponse.data.response.venues) {
 			var nextMinutes = new Date();
 			nextMinutes.setMinutes(nextMinutes.getMinutes() + 90);
@@ -76,7 +75,7 @@ if (Meteor.isServer) {
 		var venueLocationLat = params.query.venueLocationLat;
 		var venueLocationLng = params.query.venueLocationLng;
 
-		var uberResponse = HTTP.call('GET',"https://sandbox-api.uber.com/v1/estimates/price?start_latitude="+currLat+"&start_longitude="+currLng+"&end_latitude="+venueLocationLat+"&end_longitude="+venueLocationLng+"&server_token=AZZ_BGU7B0aZQle-VEc-VQ8FvYYLZnLJ2AiwZ6ki&seat_count=2");
+		var uberResponse = HTTP.call('GET',"https://sandbox-api.uber.com/v1/estimates/price?start_latitude="+currLat+"&start_longitude="+currLng+"&end_latitude="+venueLocationLat+"&end_longitude="+venueLocationLng+"&server_token="+process.env.UBER_SERVER_TOKEN+"&seat_count=2");
 
 		res.setHeader( 'Content-Type', 'application/json' );
 		res.statusCode = 200;

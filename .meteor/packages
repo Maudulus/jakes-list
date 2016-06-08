@@ -30,3 +30,4 @@ meteorhacks:picker
 http
 react-meteor-data
 accounts-ui-unstyled
+pauldowman:dotenv
