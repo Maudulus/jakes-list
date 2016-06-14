@@ -7,10 +7,12 @@ export default class Header extends React.Component {
   render() {
     return (
       <header className='Header'>
-        <Link to="/">Map</Link> &nbsp;
-        <Link to="about">About Page</Link> &nbsp;
+      	<div id="top-bar-section">
+	        <Link to="/">Map</Link> &nbsp;
+	        <Link to="about">About Page</Link> &nbsp;
 
-        <LoginButtons align='left' />
+	        <LoginButtons align='left' />
+        </div>
       </header>
     );
   }

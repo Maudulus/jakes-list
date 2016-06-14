@@ -17,6 +17,13 @@ body {
 		background: #021c2c;
 		position:relative;
 		color:white;
+		#top-bar-section {
+			position: absolute;
+			top: 50%; 
+			transform: translate(0,-50%);		
+			width:100%;	
+			z-index:20;
+		}
 		a {
 			color:white;
 			padding-left:10px;
@@ -24,14 +31,20 @@ body {
 		}
 		#login-buttons {
 			z-index:4;
-			position: relative;
+			position:absolute;
 			background: #021c2c;
+			right:0;
+			margin-top:-22px;
+			// line-height:3;
 			.login-link-text {
 				float:right;
 			}
 			#login-dropdown-list {
 			    clear: both;
 				padding:10px;
+				.login-close-text {
+					padding:0;
+				}
 				label {
 					color:#1fbfb7;
 				}
