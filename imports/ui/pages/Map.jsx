@@ -10,14 +10,12 @@ Map = React.createClass({
     return (
       <div>
         <div className={classNames('flip-container')}>
+          <a className={classNames('button toggle-map-list')} onClick={self.flipMapList}>List</a>
           <div className={classNames('flipper')} ontouchstart="this.classList.toggle('hover');">
             <div className={classNames('front')}>
               <div id="map" className={classNames('map')}></div>
-              <a className={classNames('button')} onClick={self.flipMapList}>List</a>
             </div>
             <div className={classNames('back')}>
-              <h2>Lorem Ipsum</h2>
-              <a className={classNames('button')} onClick={self.flipMapList}>Map</a>
               <div id="list-item" className={classNames('row list-item')}></div>
             </div>  
            </div>
@@ -29,6 +27,9 @@ Map = React.createClass({
     );
   },
   flipMapList() {
+    var toggleMapList = $('.toggle-map-list');
+    toggleMapList.html(toggleMapList.html() == 'List' ? 'Map' : 'List');
+    toggleMapList.toggleClass('on');
     $('.flip-container').toggleClass('flip');
   },
   componentDidMount() { 

@@ -61,10 +61,16 @@ body {
 		height:calc( 100vh - 50px );
 		width:100%;
 	}
+	.toggle-map-list {
+		background-color: #79d1e5;
+		&.on {
+			background-color: #9b88cb;
+		}
+	}
 	.flip-container {
 		perspective: 1000;
 		width: 100%;
-		height: calc( 100vh - 50px );
+		height: calc( 100vh - 100px );
 		overflow: scroll;
 		//flip class that is added to turn container over
 		&.flip .flipper {
@@ -105,20 +111,24 @@ body {
 	}
 	#venue-bind {
 		margin-top: 50px;
-
 		position: absolute;
 		top: 0;
-		background: white;
+		background: #021c2c;
 		height: calc( 100% - 50px );
 		width:100%;
+		border-top:2px solid #1fbfb7;
 		&.hidden {
 			display:none;
 		}
 		.venue {
+			color: #1fbfb7;
+			h1,h3 {
+				color: #1fbfb7;
+			}
 			.close-modal {
 				right: 20px;
 				position: absolute;
-				color:black;
+				color:#1fbfb7;
 				font-size: 50px;
 				font-weight:bold;
 				top: 0;	
