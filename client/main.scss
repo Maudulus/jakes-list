@@ -145,6 +145,21 @@ body {
 			h1,h3 {
 				color: #1fbfb7;
 			}
+			.pulse-element {
+				animation: pulse 5s infinite;
+				text-align: center;
+				font-size:3.0rem;
+			}
+			@keyframes pulse {
+				0% {
+					color: #1fbfb7;
+					text-shadow: 2px 2px 16px #1fbfb7;
+				}
+				100% {
+					color: #008CBA;
+					text-shadow: 2px 2px 16px #008CBA;
+				}
+			}			
 			.close-modal {
 				right: 20px;
 				position: absolute;
