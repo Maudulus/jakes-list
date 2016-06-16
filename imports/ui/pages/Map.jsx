@@ -40,7 +40,7 @@ Map = React.createClass({
           if(geo) {
             if (Mapbox.loaded()) {
               L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
-              map = L.mapbox.map('map', 'mapbox.streets').setView([geo.lat, geo.lng], 12);   
+              map = L.mapbox.map('map', 'mapbox.dark').setView([geo.lat, geo.lng], 12);   
               self.queryFourSquare('nightclub',geo.lat,geo.lng);
               if (location.search) self.mountVenue(self.urlParams());
             }
@@ -69,7 +69,7 @@ Map = React.createClass({
     $.each(arr,function(index, thisVenue) {
       var marker = L.marker([thisVenue.location.lat, thisVenue.location.lng], {
             icon: L.mapbox.marker.icon({
-              'marker-color': '#9c89cc'
+              'marker-color': '#008CBA'
             })
           })
           .bindPopup('<div class=\"marker-title\"><h2>'+thisVenue.name+'</h2></div><table> <tr> <th>Phone</th> <td>'+thisVenue.contact.formattedPhone+'</td> </tr> <tr> <th>Address</th> <td>'+thisVenue.location.formattedAddress[0]+thisVenue.location.formattedAddress[1]+'</td> </tr> </table>')

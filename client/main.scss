@@ -6,7 +6,7 @@ body {
 	// font-family: 'Raleway', sans-serif;	
 	// font-family: 'Droid Sans', sans-serif;
 	font-family: 'Josefin Sans', sans-serif;
-	background: #e6e6e6;
+	background: #021c2c;
 	color:white;
 	h1,h2,h3,h4 {
 		font-family: 'Abril Fatface', cursive;
@@ -58,19 +58,24 @@ body {
 		}
 	}
 	#map {
-		height:calc( 100vh - 50px );
+		height:calc( 100vh - 50px ); 
 		width:100%;
+		border-top:2px solid #008CBA;
 	}
 	.toggle-map-list {
+		margin:0;
 		background-color: #79d1e5;
+		font-family: 'Josefin Sans', sans-serif;
 		&.on {
-			background-color: #9b88cb;
+			background-color: #008CBA;
 		}
 	}
 	.flip-container {
+		border-top:2px solid #008CBA;
+		
 		perspective: 1000;
 		width: 100%;
-		height: calc( 100vh - 100px );
+		height: calc( 100vh - 50px );
 		overflow: scroll;
 		//flip class that is added to turn container over
 		&.flip .flipper {
@@ -106,6 +111,21 @@ body {
 			/* back, initially hidden pane */
 			.back {
 				transform: rotateY(180deg);
+			    padding: 10px;
+		        border-top: 2px solid #008CBA;
+			    #list-item {
+			    	.small-12 {
+			    		padding-top:10px;
+			    		padding-bottom:10px;
+			    		padding-left:0;
+			    		padding-right:0;
+			    		border-bottom: 1px solid;
+						font-family: 'Josefin Sans', sans-serif;
+						&:hover {
+							background-color:white;
+						}
+			    	}
+			    }
 			}			
 		}		
 	}
@@ -116,7 +136,7 @@ body {
 		background: #021c2c;
 		height: calc( 100% - 50px );
 		width:100%;
-		border-top:2px solid #1fbfb7;
+		border-top:2px solid #008CBA;
 		&.hidden {
 			display:none;
 		}
