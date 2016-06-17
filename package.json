@@ -19,6 +19,7 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "history": "^2.1.0",
+    "node-uber": "^0.9.6",
     "react": "^15.1.0",
     "react-addons-create-fragment": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",

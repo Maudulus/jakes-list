@@ -40,7 +40,7 @@ Map = React.createClass({
           if(geo) {
             if (Mapbox.loaded()) {
               L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
-              map = L.mapbox.map('map', 'mapbox.dark').setView([geo.lat, geo.lng], 12);   
+              map = L.mapbox.map('map', 'mapbox.dark', { zoomControl:false } ).setView([geo.lat, geo.lng], 12);   
               self.queryFourSquare('nightclub',geo.lat,geo.lng);
               if (location.search) self.mountVenue(self.urlParams());
             }
