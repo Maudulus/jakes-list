@@ -26,7 +26,7 @@ Venue = React.createClass({
           <div className="medium" onClick={self.handlePrice.bind(this,venueName,1)}>$$</div>
           <div className="high" onClick={self.handlePrice.bind(this,venueName,2)}>$$$</div>
         </div>
-        <h2 className="pulse-element">LIT</h2>
+        {/* <h2 className="pulse-element">LIT</h2> */}
         <div id="uber-estimate"></div>
       </div>
     );

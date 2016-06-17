@@ -8,8 +8,8 @@ export default class Header extends React.Component {
     return (
       <header className='Header'>
       	<div id="top-bar-section">
-	        <Link to="/">Map</Link> &nbsp;
-	        <Link to="about">About</Link> &nbsp;
+	        <Link to="/">Home</Link> &nbsp;
+	        {/*  <Link to="about">About</Link> &nbsp; */}
 
 	        <LoginButtons align='left' />
         </div>

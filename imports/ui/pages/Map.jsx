@@ -11,6 +11,7 @@ Map = React.createClass({
       <div>
         <div className={classNames('flip-container')}>
           <a className={classNames('button toggle-map-list')} onClick={self.flipMapList}>List</a>
+          <a className={classNames('button filter-map-list')}>Filter</a>
           <div className={classNames('flipper')} ontouchstart="this.classList.toggle('hover');">
             <div className={classNames('front')}>
               <div id="map" className={classNames('map')}></div>
@@ -72,8 +73,11 @@ Map = React.createClass({
               'marker-color': '#008CBA'
             })
           })
-          .bindPopup('<div class=\"marker-title\"><h2>'+thisVenue.name+'</h2></div><table> <tr> <th>Phone</th> <td>'+thisVenue.contact.formattedPhone+'</td> </tr> <tr> <th>Address</th> <td>'+thisVenue.location.formattedAddress[0]+thisVenue.location.formattedAddress[1]+'</td> </tr> </table>')
+          // .bindPopup('<div class=\"marker-title\"><h2>'+thisVenue.name+'</h2></div><table> <tr> <th>Phone</th> <td>'+thisVenue.contact.formattedPhone+'</td> </tr> <tr> <th>Address</th> <td>'+thisVenue.location.formattedAddress[0]+thisVenue.location.formattedAddress[1]+'</td> </tr> </table>')
           .addTo(map);
+      marker.on('click',function(){
+        ReactDOM.render(<Venue venueCompleteObj={thisVenue} venueName={thisVenue.name}/>,document.getElementById('venue-bind'));
+      });
     });
   },
   mountVenue(urlParams) {
