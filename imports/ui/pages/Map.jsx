@@ -36,17 +36,27 @@ Map = React.createClass({
   componentDidMount() { 
     var self=this;
     Mapbox.load(); 
-    (function myLoop (i) {          
+    (function myMapLoop (i) {          
+       setTimeout(function () {   
+          if (Mapbox.loaded()) {
+            L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
+            map = L.mapbox.map('map', 'mapbox.dark', { zoomControl:false } ).setView([37.0902, -95.7129], 3);   
+          }
+          if (--i && map == null) myMapLoop(i);      
+       }, 1000)
+    })(10);     
+    (function myGeoLoop (i) {          
        setTimeout(function () {   
           if(geo) {
-            if (Mapbox.loaded()) {
-              L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
-              map = L.mapbox.map('map', 'mapbox.dark', { zoomControl:false } ).setView([geo.lat, geo.lng], 12);   
+            // if (Mapbox.loaded()) {
+              // L.mapbox.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
+              // map = L.mapbox.map('map', 'mapbox.dark', { zoomControl:false } ).setView([geo.lat, geo.lng], 12); 
+              map.setView([geo.lat,geo.lng],12);  
               self.queryFourSquare('nightclub',geo.lat,geo.lng);
               if (location.search) self.mountVenue(self.urlParams());
-            }
+            // }
           }
-          if (--i && geo == null) myLoop(i);      
+          if (--i && geo == null) myGeoLoop(i);      
        }, 1000)
     })(10);                        
   },

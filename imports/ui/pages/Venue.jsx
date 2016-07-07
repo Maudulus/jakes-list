@@ -12,7 +12,7 @@ Venue = React.createClass({
     return (
       <div className='venue'>
         <a className={classNames('close-modal')} onClick={self.closeModal}>×</a>
-        <h1>This is ... </h1> // {venueName}
+        <h1>{venueName}</h1> 
 
         <WaitTimeClass name={venueName}/>
         <PriceClass name={venueName}/>
